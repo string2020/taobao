@@ -10,7 +10,6 @@ import com.lala.model.User;
 @Controller
 public class HomeController 
 {
-
 	@ModelAttribute("u")
 	public User pre()
 	{
