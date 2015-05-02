@@ -3,14 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Home</title>
+<title>你好，欢迎回来</title>
 </head>
 <body>
-<h1>Home page</h1>
-<div>
-	<p>${u.id }</p>
-	<p>${u.name }</p>
-	<p>${u.desc }</p>
-</div>
+<h1>你好，欢迎回来</h1>
 </body>
 </html>

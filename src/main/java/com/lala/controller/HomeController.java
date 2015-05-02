@@ -1,31 +1,26 @@
 package com.lala.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.lala.model.User;
 
 @Controller
 public class HomeController 
 {
-	@ModelAttribute("u")
-	public User pre()
-	{
-		User user = new User();
-		user.setDesc("this is desc");
-		user.setId(10010);
-		user.setName("Apache");
-		return user;
-	}
 	
+	private static final String LOGIN_USER = "login_user";
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String index(@ModelAttribute("u") User user)
+	public String index(HttpServletRequest request)
 	{
-		System.out.println(user);
-		return "/index";
+		if(request.getSession().getAttribute(LOGIN_USER) != null)
+		{
+			return "redirect:/home.do";
+		}
+		String ua = request.getHeader("User-Agent");
+		return getPageDir(ua) + "/index";
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -34,5 +29,13 @@ public class HomeController
 		return "/home";
 	}
 	
+	private String getPageDir(String ua)
+	{
+		if(ua.indexOf("iPhone") != -1 || ua.indexOf("Mobile") != -1 || ua.indexOf("iPad") != -1 || ua.indexOf("Android") != -1)
+		{
+			return "/m";
+		}
+		return "";
+	}
 	
 }
