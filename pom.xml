@@ -6,7 +6,7 @@
 	<artifactId>cctv</artifactId>
 	<packaging>war</packaging>
 
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>shop Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
