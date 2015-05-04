@@ -101,5 +101,16 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+		<repository>
+			<id>ibiblio</id>
+			<name>ibiblio</name>
+			<url>http://mirrors.ibiblio.org/maven2/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
 
 </project>
