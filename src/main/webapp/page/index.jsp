@@ -7,7 +7,7 @@
 <title>心随购物</title>
 </head>
 <body>
-<h1>欢迎来到心随购物网</h1>
+<h1>欢迎来到心随购物网(${current_version})</h1>
 <h1>你尚未登录，请先登录</h1>
 <a href="https://api.weibo.com/oauth2/authorize?client_id=${ CLIENT_ID}&response_type=code&redirect_uri=${REGISTERED_REDIRECT_URI }">请先登陆</a>
 </body>
