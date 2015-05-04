@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class HomeController 
+public class HomeController extends BaseController
 {
 	
 	private static final String LOGIN_USER = "login_user";
@@ -28,18 +28,4 @@ public class HomeController
 	{
 		return "/home";
 	}
-	
-	private String getPageDir(String ua)
-	{
-		if(ua == null)
-		{
-			return "";
-		}
-		if(ua.indexOf("iPhone") != -1 || ua.indexOf("Mobile") != -1 || ua.indexOf("iPad") != -1 || ua.indexOf("Android") != -1)
-		{
-			return "/m";
-		}
-		return "";
-	}
-	
 }

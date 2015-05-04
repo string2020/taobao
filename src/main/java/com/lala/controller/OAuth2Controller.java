@@ -19,12 +19,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import weibo4j.Users;
+import weibo4j.model.User;
+
 import com.google.gson.Gson;
 import com.lala.config.OAuth2Config;
 
 @Controller
 @RequestMapping("/sina")
-public class OAuth2Controller 
+public class OAuth2Controller extends BaseController
 {
 	/**
 	 * http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6
@@ -43,13 +46,35 @@ public class OAuth2Controller
 	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
 	public String cancel(HttpServletRequest request)
 	{
-		String code = request.getParameter("code");
-		
-		
 		return "/index";
 	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home(HttpServletRequest request)
+	{
+		try
+		{
+			Map userMaps = getMaps(request);
+			
+			String access_token = userMaps.get("access_token").toString();
 
-	private void getMaps(HttpServletRequest request)throws Exception
+			if(access_token != null)
+			{
+				Users um = new Users();
+				um.setToken(access_token);
+				User user = um.showUserById(userMaps.get("uid").toString());
+				request.setAttribute("user", user);
+			}
+			
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return getPageDir(request.getHeader("User-Agent")) + "/home";
+	}
+
+	private Map getMaps(HttpServletRequest request)throws Exception
 	{
 		StringBuffer buf = new StringBuffer("https://api.weibo.com/oauth2/access_token");
 			
@@ -79,7 +104,9 @@ public class OAuth2Controller
 	    
 	    Gson g = new Gson();
 	    
-	    request.setAttribute("maps", g.fromJson(result, Map.class));
+	    Map maps = g.fromJson(result, Map.class);
+	    
+	    return maps;
 	}
 }
 
