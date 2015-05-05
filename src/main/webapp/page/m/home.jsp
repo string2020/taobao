@@ -10,13 +10,18 @@
 <meta name="full-screen" content="yes" />  
 <meta name="x5-full-screen" content="yes" />
 <title>你好，欢迎回来</title>
+<style type="text/css">
+	td {
+		width:20px;
+	}
+</style>
 </head>
 <body>
 <h1>你好，欢迎回来</h1>
-<table style="width: 40%;align:center;">
+<table style="width: 100%;align:center;">
 	<tr>
-		<td>用户UID</td>
-		<td>${user.id }<img alt="" src="${user.profileImageUrl }" /></td>
+		<td width="40%">用户UID</td>
+		<td width="60%">${user.id }<img alt="" src="${user.profileImageUrl }" /></td>
 	</tr>
 	<tr>
 		<td>用户名称</td>
