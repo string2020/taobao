@@ -15,11 +15,19 @@ public class HomeController extends BaseController
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(HttpServletRequest request)
 	{
+		
+		if(request.getParameter("reset") == "1")
+		{
+			request.getSession().invalidate();
+		}
+		
 		if(request.getSession().getAttribute(LOGIN_USER) != null)
 		{
-			return "redirect:/home.do";
+			return "redirect:/sina/home.do";
 		}
+		
 		String ua = request.getHeader("User-Agent");
+
 		return getPageDir(ua) + "/index";
 	}
 	

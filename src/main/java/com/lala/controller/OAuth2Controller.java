@@ -38,7 +38,16 @@ public class OAuth2Controller extends BaseController
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
 	public String callback(HttpServletRequest request) throws Exception
 	{
-		getMaps(request);
+		Map userMaps = getMaps(request);
+		
+		String access_token = userMaps.get("access_token").toString();
+		
+		if(access_token != null)
+		{
+			request.setAttribute("access_token", access_token);
+			request.setAttribute("uid", userMaps.get("uid").toString());
+			return "redirect:/sina/home";
+		}
 		
 		return "/callback";
 	}
@@ -54,24 +63,26 @@ public class OAuth2Controller extends BaseController
 	{
 		try
 		{
-			Map userMaps = getMaps(request);
-			
-			String access_token = userMaps.get("access_token").toString();
+			Object access_token = request.getSession().getAttribute("access_token");
 
 			if(access_token != null)
 			{
 				Users um = new Users();
-				um.setToken(access_token);
-				User user = um.showUserById(userMaps.get("uid").toString());
+				um.setToken(access_token.toString());
+				User user = um.showUserById(request.getSession().getAttribute("uid").toString());
 				request.setAttribute("user", user);
+				
+				return getPageDir(request.getHeader("User-Agent")) + "/home";
 			}
 			
 		} catch (Exception e) 
 		{
 			e.printStackTrace();
+			request.setAttribute("error", e);
+			return "/error";
 		}
 		
-		return getPageDir(request.getHeader("User-Agent")) + "/home";
+		return "/callback";
 	}
 
 	private Map getMaps(HttpServletRequest request)throws Exception

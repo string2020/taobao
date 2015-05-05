@@ -49,6 +49,10 @@
 		<servlet-name>springServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>12</session-timeout>
+	</session-config>
 
 	<jsp-config>
 		<jsp-property-group>
