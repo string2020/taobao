@@ -44,9 +44,9 @@ public class OAuth2Controller extends BaseController
 		
 		if(access_token != null)
 		{
-			request.setAttribute("access_token", access_token);
-			request.setAttribute("uid", userMaps.get("uid").toString());
-			return "redirect:/sina/home";
+			request.getSession().setAttribute("access_token", access_token);
+			request.getSession().setAttribute("uid", userMaps.get("uid").toString());
+			return "redirect:/sina/home.do";
 		}
 		
 		return "/callback";
