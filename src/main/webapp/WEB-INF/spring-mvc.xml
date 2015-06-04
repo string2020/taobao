@@ -16,7 +16,7 @@
 	
 	<!-- 定义JSP文件的位置 --> 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/page/"/>
+		<property name="prefix" value="/page"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 			
